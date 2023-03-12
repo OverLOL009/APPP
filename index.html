@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wave Game</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			margin: 20px;
+			font-family: Arial, sans-serif;
+			width: 100%;
+			text-align: center;
+		}
+		th {
+			background-color: #dddddd;
+			padding: 8px;
+			font-size: 18px;
+			font-weight: bold;
+			text-transform: uppercase;
+			border: 1px solid #dddddd;
+		}
+		td {
+			padding: 8px;
+			border: 1px solid #dddddd;
+		}
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+	</style>
+</head>
+<body>
+	<h1>Wave Game</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Address</th>
+				<th>Current Balance</th>
+				<th>Current Reward</th>
+				<th>Play</th>
+			</tr>
+		</thead>
+		<tbody id="table-body">
+		</tbody>
+	</table>
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+	<script>
+		const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+		const privateKey = 'YOUR_PRIVATE_KEY';
+		const apiKey = 'YOUR_API_KEY';
+
+		const provider = new ethers.providers.InfuraProvider('mainnet', apiKey);
+		const signer = new ethers.Wallet(privateKey, provider);
+		const abi = [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_player",
+						"type": "address"
+					}
+				],
+				"name": "getRewardAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_player",
+						"type": "address"
+					}
+				],
+				"name": "getWaveCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTotalWaves",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "wave",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						
